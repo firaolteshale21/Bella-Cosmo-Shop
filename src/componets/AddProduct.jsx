@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const AddProduct = ({ handleClosePage2 }) => (
   <div className="bg-gray-300">
     <div className=" container-addremove ">
-      <div className="bg-gray-100  h-screen p-4 flex flex-col gap-9 pt-20 pb-20">
+      <div className="bg-gray-100 min-h-screen p-8 flex flex-col gap-9 pt-4 pb-4">
         <div className="flex justify-end text-gray-600 hover:text-gray-800">
           <button onClick={handleClosePage2}>
             <svg
@@ -24,28 +24,36 @@ const AddProduct = ({ handleClosePage2 }) => (
           </button>
         </div>
 
-        <div className="flex flex-col justify-center items-start gap-3">
-          <label className="text-3xl">Product Name:</label>
+        <div className="flex flex-col justify-center items-start gap-3 text-2xl text-gray-900 ">
+          <label className="">Product Name:</label>
           <input
-            className="bg-white  text-black  inline-block py-3 px-7 text-3xl rounded-2xl w-full border-none outline-none pl"
+            className="bg-white inline-block py-2 px-5  rounded-2xl w-full border-none outline-none pl"
             type="text"
             placeholder="Product Name..."
           />
         </div>
-        <div className="flex flex-col justify-center items-start gap-3">
-          <label className="text-3xl">Product Description:</label>
+        <div className="flex flex-col justify-center items-start gap-3 text-2xl text-gray-900 ">
+          <label className="">Product Description:</label>
           <textarea
-            className="bg-white  text-black  inline-block py-3 px-7 text-3xl rounded-2xl w-full border-none outline-none"
+            className="bg-white inline-block py-2 px-5  rounded-2xl w-full border-none outline-none"
             type="text"
             placeholder="Description..."
           />
         </div>
-        <div className="flex flex-col justify-center items-start gap-3">
-          <label className="text-3xl">Product Price:</label>
+        <div className="flex flex-col justify-center items-start gap-3 text-2xl text-gray-900">
+          <label className="">Product Price:</label>
           <input
-            className="bg-white  text-black  inline-block py-3 px-7 text-3xl rounded-2xl w-full border-none outline-none"
+            className="bg-white inline-block py-2 px-5  rounded-2xl w-full border-none outline-none"
             type="number"
             placeholder="Price"
+          />
+        </div>
+        <div className="flex flex-col justify-center items-start gap-3 text-2xl text-gray-900">
+          <label className="">Stock:</label>
+          <input
+            className="bg-white inline-block py-2 px-5  rounded-2xl w-full border-none outline-none"
+            type="number"
+            placeholder="Stock Quantity..."
           />
         </div>
         <div className="flex justify-center">

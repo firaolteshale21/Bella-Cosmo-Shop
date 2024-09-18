@@ -26,3 +26,232 @@ body {
   width: 60px;
   height: 60px;
 }
+
+/* Queries */
+
+/* AdminDashBoard */
+
+@media (max-width: 1100px) {
+  .orders-card {
+    font-size: 18px;
+  }
+  .btn-admin {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 850px) {
+  .orders-card {
+    font-size: 16px;
+  }
+  .btn-admin {
+    font-size: 16px;
+  }
+  .orders-heading {
+    gap: 20px;
+  }
+  .orders-list {
+    gap: 20px;
+  }
+
+  .btn-add-admin {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .product {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 770px) {
+  .orders-card {
+    font-size: 14px;
+  }
+  .btn-admin {
+    font-size: 16px;
+  }
+  .product-list {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 695px) {
+  .heading-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .heading-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product {
+    padding-left: 0px;
+  }
+  .product-list {
+    padding: 10px 5px;
+  }
+  .btn-admin {
+    flex-direction: column;
+  }
+  .btn-pm,
+  .btn-add-admin,
+  .btn-users {
+    width: 100%;
+  }
+}
+
+/* ProductManagment */
+
+@media (max-width: 1100px) {
+  .pm-text {
+    padding: 20px 0;
+  }
+  .p-name {
+    font-size: 24px;
+  }
+  .p-description {
+    font-size: 16px;
+  }
+  .p-stock,
+  .p-price {
+    font-size: 20px;
+  }
+
+  .btn-update,
+  .btn-remove {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .btn-add-product {
+    font-size: 18px;
+    padding: 7px;
+  }
+  .pm-text {
+    padding: 10px 0;
+  }
+  .p-name {
+    font-size: 20px;
+  }
+  .p-description {
+    font-size: 14px;
+  }
+  .p-stock,
+  .p-price {
+    font-size: 18px;
+  }
+  .btn-update,
+  .btn-remove {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 691px) {
+  .btn-add-product {
+    font-size: 16px;
+    padding: 5px;
+    width: 50%;
+  }
+  .pm-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+  }
+  .p-img {
+    object-fit: contain;
+  }
+  .pm-text {
+    padding: 10px;
+  }
+  .btn-pm {
+    padding: 20px;
+  }
+  .btn-update,
+  .btn-remove {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+/* Users */
+
+@media (max-width: 1000px) {
+  .update-user,
+  .remove-user {
+    font-size: 20px;
+  }
+}
+@media (max-width: 870px) {
+  .update-user,
+  .remove-user {
+    font-size: 18px;
+  }
+  .user-container {
+    padding: 20px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .update-user,
+  .remove-user {
+    font-size: 14px;
+  }
+  .user-name {
+    font-size: 26px;
+  }
+  .user-phone {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 700px) {
+  .update-user,
+  .remove-user {
+    font-size: 12px;
+  }
+  .user-name {
+    font-size: 24px;
+  }
+  .user-phone {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .users-heading {
+    font-size: 24px;
+  }
+  .user-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding: 10px;
+  }
+  .users-detail {
+    margin-bottom: 20px;
+  }
+  .btn-user {
+    width: 100%;
+
+    align-items: center;
+    flex-direction: row;
+  }
+  .update-user,
+  .remove-user {
+    font-size: 12px;
+    width: 100%;
+  }
+  .user-name {
+    font-size: 24px;
+  }
+  .user-phone {
+    font-size: 20px;
+  }
+}

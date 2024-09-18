@@ -25,9 +25,9 @@ const ProductManagement = ({ handleClosePage }) => {
     <div className="bg-gray-200">
       {activePage === null ? (
         <div className="bg-gray-200 min-h-screen container-users m-6 rounded-3xl p-9">
-          <div className="flex justify-between items-center gap-10 p-5 mb-4">
+          <div className="flex justify-between items-center gap-10  mb-4">
             <div className=" text-gray-900  inline-block  text-4xl  w-1/5  ">
-              <h1>USERS</h1>
+              <h1 className="users-heading">USERS</h1>
             </div>
 
             <div className="flex justify-end hover:text-gray-700">
@@ -53,23 +53,25 @@ const ProductManagement = ({ handleClosePage }) => {
           {users.map((user) => (
             <div
               key={user.id}
-              className="bg-blue-100 mb-12 shadow-md rounded-2xl overflow-hidden flex justify-between p-10 pr-16"
+              className="bg-blue-100 mb-12 shadow-md rounded-2xl overflow-hidden flex justify-between p-10 pr-16 user-container"
             >
-              <div className="flex flex-col gap-4">
-                <h1 className="text-4xl text-left text-gray-900">
+              <div className="flex flex-col gap-4 users-detail">
+                <h1 className="text-4xl text-left text-gray-900 user-name">
                   {user.name}
                 </h1>
-                <p className="text-2xl text-left text-gray-700">{user.phone}</p>
+                <p className="text-2xl text-left text-gray-700 user-phone">
+                  {user.phone}
+                </p>
               </div>
-              <div className="flex flex-col gap-3 w-1/5 self-center">
+              <div className="flex flex-col gap-3  w-2/5 self-center btn-user">
                 <div
-                  className="bg-yellow-600 text-gray-100 hover:bg-yellow-700 inline-block py-2 px- text-2xl rounded-2xl cursor-pointer shadow-md"
+                  className="bg-yellow-600 text-gray-100 hover:bg-yellow-700 inline-block py-2 text-2xl rounded-2xl cursor-pointer shadow-md  w-3/4 self-end update-user"
                   onClick={() => handleUpdateUserClick(user.id)}
                 >
                   <h1>Update User</h1>
                 </div>
                 <div
-                  className="bg-red-600 text-gray-100 hover:bg-red-700 inline-block py-2 px- text-2xl rounded-2xl cursor-pointer shadow-md"
+                  className="bg-red-600 text-gray-100 hover:bg-red-700 inline-block py-2 text-2xl rounded-2xl cursor-pointer shadow-md update-user w-3/4 self-end remove-user"
                   onClick={() => handleRemoveUser(user.id)}
                 >
                   <h1>Remove User</h1>
