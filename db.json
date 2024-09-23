@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Shampoo",
+      "description": "Unleash the full potential of your hair with our Revive & Shine Nourishing Shampoo.",
+      "stock": "20",
+      "price": "30$",
+      "imgSrc": "https://images.unsplash.com/photo-1701992679010-7cf5dfee49d5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": 2,
+      "name": "Nail Color",
+      "description": "A perfect nail color to match any occasion.",
+      "stock": "15",
+      "price": "15$",
+      "imgSrc": "https://images.unsplash.com/photo-1598104358204-87cefc7c5986?q=80&w=1818&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ]
+}

@@ -31,7 +31,7 @@ body {
 
 /* AdminDashBoard */
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .orders-card {
     font-size: 18px;
   }
@@ -40,39 +40,44 @@ body {
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
   .orders-card {
     font-size: 16px;
   }
   .btn-admin {
-    font-size: 16px;
-  }
-  .orders-heading {
-    gap: 20px;
-  }
-  .orders-list {
-    gap: 20px;
-  }
-
-  .btn-add-admin {
-    padding-left: 5px;
-    padding-right: 5px;
+    font-size: 20px;
   }
 
   .product {
     padding-left: 20px;
   }
+
+  .orders-heading,
+  .orders-list {
+    gap: 12px;
+  }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 851px) {
   .orders-card {
     font-size: 14px;
   }
   .btn-admin {
     font-size: 16px;
   }
-  .product-list {
-    padding: 0px;
+
+  .btn-add-admin {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+@media (max-width: 770px) {
+  .orders-card {
+    font-size: 12px;
+  }
+  .btn-admin {
+    font-size: 16px;
   }
 }
 
@@ -88,9 +93,15 @@ body {
   .product {
     padding-left: 0px;
   }
-  .product-list {
-    padding: 10px 5px;
+
+  .lists {
+    flex-direction: row;
+    justify-content: space-between;
+    /* gap: 30px;
+    white-space: nowrap;
+    overflow-x: auto; */
   }
+
   .btn-admin {
     flex-direction: column;
   }
@@ -150,11 +161,24 @@ body {
 }
 
 @media (max-width: 691px) {
+  .add-search {
+    flex-direction: column-reverse;
+    gap: 20px;
+    padding: 0;
+  }
   .btn-add-product {
     font-size: 16px;
     padding: 5px;
-    width: 50%;
+    width: 100%;
   }
+  .search {
+    width: 100%;
+  }
+  .close {
+    padding: 0;
+    margin-bottom: 30px;
+  }
+
   .pm-container {
     display: flex;
     justify-content: center;

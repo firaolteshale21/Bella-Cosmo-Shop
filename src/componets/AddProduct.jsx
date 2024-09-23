@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const AddProduct = ({ handleClosePage2 }) => (
   <div className="bg-gray-300">
     <div className=" container-addremove ">
-      <div className="bg-gray-100 min-h-screen p-8 flex flex-col gap-9 pt-4 pb-4">
+      <div className="bg-gray-100 min-h-screen p-6 flex flex-col gap-9 pt-4 pb-4">
         <div className="flex justify-end text-gray-600 hover:text-gray-800">
           <button onClick={handleClosePage2}>
             <svg
@@ -40,6 +40,7 @@ const AddProduct = ({ handleClosePage2 }) => (
             placeholder="Description..."
           />
         </div>
+
         <div className="flex flex-col justify-center items-start gap-3 text-2xl text-gray-900">
           <label className="">Product Price:</label>
           <input
@@ -55,6 +56,14 @@ const AddProduct = ({ handleClosePage2 }) => (
             type="number"
             placeholder="Stock Quantity..."
           />
+        </div>
+        <div className="flex flex-col justify-center items-start gap-3 text-2xl text-gray-900 ">
+          <select className="bg-green-200 hover:bg-green-300 cursor-pointer py-4 px-5  rounded-2xl w-full border-none outline-none">
+            <option value="">Product Category</option>
+            <option value="">Skincare Products</option>
+            <option value="">Haircare Products</option>
+            <option value="">Accessories</option>
+          </select>
         </div>
         <div className="flex justify-center">
           <div className="bg-green-600 text-white hover:bg-green-500 inline-block py-3 px-6 text-3xl rounded-2xl cursor-pointer">

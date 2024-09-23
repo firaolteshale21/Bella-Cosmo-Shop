@@ -10,7 +10,12 @@ const ProductManagement = ({ handleClosePage }) => {
   ]);
 
   const handleRemoveUser = (userId) => {
-    setUsers(users.filter((user) => user.id !== userId));
+    const confirmRemove = window.confirm(
+      "Are you sure you want to remove this user?"
+    );
+    if (confirmRemove) {
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    }
   };
 
   const handleUpdateUserClick = (userId) => {
