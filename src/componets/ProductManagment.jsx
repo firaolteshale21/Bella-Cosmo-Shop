@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AddProduct from "./AddProduct";
 import UpdateProduct from "./UpdateProduct";
 
@@ -9,10 +9,10 @@ const ProductManagment = ({ handleClosePage }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    // Fetch initial products from the local JSON server
+    // Fetch initial products from your backend
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/products");
+        const response = await fetch("http://localhost:5000/api/products"); // Updated URL
         const data = await response.json();
         setProducts(data);
         setFilteredProducts(data); // Initialize filtered products
@@ -24,24 +24,48 @@ const ProductManagment = ({ handleClosePage }) => {
     fetchProducts();
   }, []);
 
-  const handleRemoveProduct = (productId) => {
+  const handleRemoveProduct = async (productId) => {
     const confirmRemove = window.confirm(
       "Are you sure you want to remove this product?"
     );
+
     if (confirmRemove) {
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product.id !== productId)
-      );
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/products/${productId}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        alert(result.message); // Show success message
+
+        // Update state to remove the deleted product
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product._id !== productId)
+        );
+
+        // Also update filteredProducts if you're using it for searching
+        setFilteredProducts((prevFilteredProducts) =>
+          prevFilteredProducts.filter((product) => product._id !== productId)
+        );
+      } catch (error) {
+        console.error("Error removing product:", error);
+        alert("Failed to remove product. Please try again.");
+      }
     }
   };
+
 
   const handleAddProductClick = () => {
     setActivePage("addProduct");
   };
 
-  const handleRemoveProductClick = () => {
-    setActivePage("removeProduct");
-  };
 
   const handleUpdateProductClick = () => {
     setActivePage("updateProduct");
@@ -60,7 +84,7 @@ const ProductManagment = ({ handleClosePage }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/products");
+      const response = await fetch("http://localhost:5000/api/products"); // Updated URL
       const data = await response.json();
 
       // Filter results based on the search query
@@ -139,12 +163,12 @@ const ProductManagment = ({ handleClosePage }) => {
 
             {filteredProducts.map((product) => (
               <div
-                key={product.id}
+                key={product._id} // Note: Use `_id` for MongoDB
                 className="bg-blue-100 mb-12 h-72 shadow-md grid grid-cols-9 gap-5 rounded-2xl overflow-hidden pm-container"
               >
                 <div className="col-span-3 flex items-center justify-center p-img ">
                   <img
-                    src={product.imgSrc}
+                    src={product.image}
                     className="object-cover w-full h-full overflow-hidden"
                     alt={product.name}
                   />
@@ -166,7 +190,7 @@ const ProductManagment = ({ handleClosePage }) => {
                   </div>
                   <div
                     className="bg-red-600 text-gray-100 hover:bg-red-700 inline-block py-2 px-2  text-2xl rounded-2xl cursor-pointer shadow-md btn-remove"
-                    onClick={() => handleRemoveProduct(product.id)}
+                    onClick={() => handleRemoveProduct(product._id)} // Updated to `_id`
                   >
                     <h1>Remove Product</h1>
                   </div>
