@@ -7,19 +7,24 @@ const ProductManagment = ({ handleClosePage }) => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null); // Selected product for update
 
   useEffect(() => {
-    // Fetch initial products from your backend
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products"); 
+        const response = await fetch("http://localhost:5000/api/products");
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
         const data = await response.json();
         setProducts(data);
-        setFilteredProducts(data); 
+        setFilteredProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
+        alert("Failed to fetch products. Please try again later.");
       }
     };
+
 
     fetchProducts();
   }, []);
@@ -43,14 +48,12 @@ const ProductManagment = ({ handleClosePage }) => {
         }
 
         const result = await response.json();
-        alert(result.message); // Show success message
+        alert(result.message);
 
-        // Update state to remove the deleted product
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product._id !== productId)
         );
 
-        // Also update filteredProducts if you're using it for searching
         setFilteredProducts((prevFilteredProducts) =>
           prevFilteredProducts.filter((product) => product._id !== productId)
         );
@@ -61,13 +64,12 @@ const ProductManagment = ({ handleClosePage }) => {
     }
   };
 
-
   const handleAddProductClick = () => {
     setActivePage("addProduct");
   };
 
-
-  const handleUpdateProductClick = () => {
+  const handleUpdateProductClick = (product) => {
+    setSelectedProduct(product); 
     setActivePage("updateProduct");
   };
 
@@ -76,23 +78,19 @@ const ProductManagment = ({ handleClosePage }) => {
   };
 
   const handleSearch = async (e) => {
-    e.preventDefault(); // Prevent form submission
-
+    e.preventDefault();
     if (!searchQuery) {
-      setFilteredProducts(products); // Reset to original products if no search query
+      setFilteredProducts(products);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/products"); // Updated URL
+      const response = await fetch("http://localhost:5000/api/products");
       const data = await response.json();
-
-      // Filter results based on the search query
       const filteredResults = data.filter((product) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
-
-      setFilteredProducts(filteredResults); // Update state with filtered results
+      setFilteredProducts(filteredResults);
     } catch (error) {
       console.error("Error fetching search results:", error);
     }
@@ -163,7 +161,7 @@ const ProductManagment = ({ handleClosePage }) => {
 
             {filteredProducts.map((product) => (
               <div
-                key={product._id} // Note: Use `_id` for MongoDB
+                key={product._id}
                 className="bg-blue-100 mb-12 h-72 shadow-md grid grid-cols-9 gap-5 rounded-2xl overflow-hidden pm-container"
               >
                 <div className="col-span-3 flex items-center justify-center p-img ">
@@ -185,13 +183,13 @@ const ProductManagment = ({ handleClosePage }) => {
                 <div className="col-span-2 flex flex-col gap-3 mr-4  self-center btn-pm">
                   <div
                     className="bg-yellow-600 text-gray-100 hover:bg-yellow-700 inline-block py-2 px-2  text-2xl rounded-2xl cursor-pointer shadow-md btn-update"
-                    onClick={() => handleUpdateProductClick()}
+                    onClick={() => handleUpdateProductClick(product)}
                   >
                     <h1>Update Product</h1>
                   </div>
                   <div
-                    className="bg-red-600 text-gray-100 hover:bg-red-700 inline-block py-2 px-2  text-2xl rounded-2xl cursor-pointer shadow-md btn-remove"
-                    onClick={() => handleRemoveProduct(product._id)} // Updated to `_id`
+                    className="bg-red-600 text-gray-100 hover:bg-red-700 inline-block py-2 px-2 text-2xl rounded-2xl cursor-pointer shadow-md btn-remove"
+                    onClick={() => handleRemoveProduct(product._id)}
                   >
                     <h1>Remove Product</h1>
                   </div>
@@ -202,8 +200,12 @@ const ProductManagment = ({ handleClosePage }) => {
         </>
       ) : activePage === "addProduct" ? (
         <AddProduct handleClosePage2={handleClosePage2} />
-      ) : activePage === "updateProduct" ? (
-        <UpdateProduct handleClosePage2={handleClosePage2} />
+      ) : activePage === "updateProduct" && selectedProduct ? ( // Check selectedProduct
+        <UpdateProduct
+          handleClosePage2={handleClosePage2}
+          product={selectedProduct}
+          onUpdateProduct={handleUpdateProductClick}
+        />
       ) : null}
     </div>
   );

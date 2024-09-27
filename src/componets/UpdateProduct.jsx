@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import  { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 // Function to render the update product page
 const UpdateProduct = ({ handleClosePage2, product }) => {
-  // Set up state to hold the updated product details
+  // Set up state to hold the updated product details, with fallback values in case product is undefined initially
   const [updatedProduct, setUpdatedProduct] = useState({
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    stock: product.stock,
+    name: product?.name || "",
+    description: product?.description || "",
+    price: product?.price || "",
+    stock: product?.stock || "",
+    category: product?.category || "",
   });
+
+  // Update the state when the product prop changes
+  useEffect(() => {
+    if (product) {
+      setUpdatedProduct({
+        name: product.name || "",
+        description: product.description || "",
+        price: product.price || "",
+        stock: product.stock || "",
+        category: product.category || "",
+      });
+    }
+  }, [product]);
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -20,13 +35,16 @@ const UpdateProduct = ({ handleClosePage2, product }) => {
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${product._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedProduct),
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/products/${product._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProduct),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update product");
@@ -34,18 +52,23 @@ const UpdateProduct = ({ handleClosePage2, product }) => {
 
       const result = await response.json();
       alert(result.message); // Show success message
-
-      // Optionally close the update form after successful update
       handleClosePage2();
+
+      
     } catch (error) {
       console.error("Error updating product:", error);
       alert("Failed to update product. Please try again.");
     }
   };
 
+  // If product prop is still undefined, you can return a loading state or nothing
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="bg-gray-300">
-      <div className=" container-addremove ">
+      <div className="container-addremove">
         <div className="bg-gray-100 min-h-screen p-8 flex flex-col gap-9 pt-4 pb-4">
           <div className="flex justify-end text-gray-600 hover:text-gray-800">
             <button onClick={handleClosePage2}>
@@ -128,6 +151,19 @@ const UpdateProduct = ({ handleClosePage2, product }) => {
       </div>
     </div>
   );
+};
+
+// Add PropTypes validation for props
+UpdateProduct.propTypes = {
+  handleClosePage2: PropTypes.func.isRequired,
+  product: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.number,
+    stock: PropTypes.number,
+    category: PropTypes.string,
+  }),
 };
 
 export default UpdateProduct;
