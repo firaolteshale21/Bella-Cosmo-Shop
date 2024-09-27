@@ -175,12 +175,12 @@ const ProductManagment = ({ handleClosePage }) => {
                 </div>
                 <div className="col-span-4  text-left py-7  flex flex-col self-center gap-4 text-gray-900 pm-text ">
                   <h1 className="text-3xl p-name">{product.name}</h1>
+                  <h1 className="text-2xl p-price">{product.category}</h1>
                   <h1 className="text-lg p-description">
                     {product.description}
                   </h1>
                   <h1 className="text-2xl p-stock">Stock: {product.stock}</h1>
                   <h1 className="text-2xl p-price">{product.price}</h1>
-                  <h1 className="text-2xl p-price">{product.category}</h1>
                 </div>
                 <div className="col-span-2 flex flex-col gap-3 mr-4  self-center btn-pm">
                   <div
