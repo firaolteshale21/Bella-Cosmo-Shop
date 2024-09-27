@@ -12,10 +12,10 @@ const ProductManagment = ({ handleClosePage }) => {
     // Fetch initial products from your backend
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products"); // Updated URL
+        const response = await fetch("http://localhost:5000/api/products"); 
         const data = await response.json();
         setProducts(data);
-        setFilteredProducts(data); // Initialize filtered products
+        setFilteredProducts(data); 
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -180,6 +180,7 @@ const ProductManagment = ({ handleClosePage }) => {
                   </h1>
                   <h1 className="text-2xl p-stock">Stock: {product.stock}</h1>
                   <h1 className="text-2xl p-price">{product.price}</h1>
+                  <h1 className="text-2xl p-price">{product.category}</h1>
                 </div>
                 <div className="col-span-2 flex flex-col gap-3 mr-4  self-center btn-pm">
                   <div
